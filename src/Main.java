@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 interface Ingredient {
@@ -44,6 +45,9 @@ class Recipe<T extends Ingredient> {
         _instructions = instructions;
         _ingredients = new ArrayList<>();
     }
+    public ArrayList<T> getIngredients() {
+        return _ingredients;
+    }
     public void addIngredient(T t) {
         _ingredients.add(t);
     }
@@ -61,21 +65,21 @@ class Recipe<T extends Ingredient> {
 }
 
 public class Main {
-    public static int menu(Scanner scan) {
-        System.out.println(" Recipe Book System ");
-        System.out.println("---------------------------");
-        System.out.println("Enter recipe name: ");
-        String recipeName = scan.nextLine();
-        System.out.println("Enter recipe instructions: ");
-        String recipeInstructions = scan.nextLine();
-        Recipe<Ingredient> recipe = new Recipe<>(recipeName, recipeInstructions);
-        System.out.println(" Recipe Book System ");
-        System.out.println("---------------------------");
-        System.out.println("1. Add an ingredient");
-        System.out.println("2. List recipe ingredients");
-        System.out.println("3. Exit");
-        int choice = scan.nextInt();
+    public static void menu(Scanner scan) {
         try {
+            System.out.println(" Recipe Book System ");
+            System.out.println("---------------------------");
+            System.out.println("Enter recipe name: ");
+            String recipeName = scan.nextLine();
+            System.out.println("Enter recipe instructions: ");
+            String recipeInstructions = scan.nextLine();
+            Recipe<Ingredient> recipe = new Recipe<>(recipeName, recipeInstructions);
+            System.out.println(" Recipe Book System ");
+            System.out.println("---------------------------");
+            System.out.println("1. Add an ingredient");
+            System.out.println("2. List recipe ingredients");
+            System.out.println("3. Exit");
+            int choice = scan.nextInt();
             while (choice != 3) {
                 if (choice == 1)
                     addIngredient(recipe, scan);
@@ -88,13 +92,12 @@ public class Main {
                 System.out.println("1. Add an ingredient");
                 System.out.println("2. List recipe ingredients");
                 System.out.println("3. Exit");
-                choice = Integer.parseInt(scan.nextLine());
+                choice = Integer.parseInt(scan.next());
             }
         } catch (NumberFormatException e) {
             System.out.println("Invalid data entered. Please enter a number (1-3).");
         }
         System.out.println("Goodbye!");
-        return choice;
     }
 
     public static void addIngredient(Recipe<Ingredient> recipe, Scanner scan) {
