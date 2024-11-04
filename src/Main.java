@@ -69,27 +69,29 @@ public class Main {
         System.out.println("Enter recipe instructions: ");
         String recipeInstructions = scan.nextLine();
         Recipe<Ingredient> recipe = new Recipe<>(recipeName, recipeInstructions);
-        int choice = 0;
-        while (choice != 3) {
-            try {
+        System.out.println(" Recipe Book System ");
+        System.out.println("---------------------------");
+        System.out.println("1. Add an ingredient");
+        System.out.println("2. List recipe ingredients");
+        System.out.println("3. Exit");
+        int choice = scan.nextInt();
+        try {
+            while (choice != 3) {
+                if (choice == 1)
+                    addIngredient(recipe, scan);
+                else if (choice == 2)
+                    recipe.print();
+                else
+                    System.out.println("Invalid choice, please select again.");
+                System.out.println(" Recipe Book System ");
+                System.out.println("---------------------------");
+                System.out.println("1. Add an ingredient");
+                System.out.println("2. List recipe ingredients");
+                System.out.println("3. Exit");
                 choice = Integer.parseInt(scan.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid data entered. Please enter a number (1-3).");
-                continue;
             }
-
-            if (choice == 1) {
-                addIngredient(recipe, scan);
-            } else if (choice == 2) {
-                recipe.print();
-            } else  {
-                System.out.println("Invalid choice, please select again.");
-            }
-            System.out.println(" Recipe Book System ");
-            System.out.println("---------------------------");
-            System.out.println("1. Add an ingredient");
-            System.out.println("2. List recipe ingredients");
-            System.out.println("3. Exit");
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid data entered. Please enter a number (1-3).");
         }
         System.out.println("Goodbye!");
         return choice;
@@ -97,9 +99,10 @@ public class Main {
 
     public static void addIngredient(Recipe<Ingredient> recipe, Scanner scan) {
         System.out.println("Solid(s) or liquid (l)?");
-        char type = scan.nextLine().toLowerCase().charAt(0);
+        char type = scan.next().toLowerCase().charAt(0);
         System.out.println("Enter ingredient name: ");
         String name = scan.nextLine();
+        name = scan.nextLine();
         System.out.println("Enter quantity: ");
         double quantity = 0;
         try {
