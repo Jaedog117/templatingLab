@@ -69,16 +69,8 @@ public class Main {
         System.out.println("Enter recipe instructions: ");
         String recipeInstructions = scan.nextLine();
         Recipe<Ingredient> recipe = new Recipe<>(recipeName, recipeInstructions);
-
         int choice = 0;
-
         while (choice != 3) {
-            System.out.println(" Recipe Book System ");
-            System.out.println("---------------------------");
-            System.out.println("1. Add an ingredient");
-            System.out.println("2. List recipe ingredients");
-            System.out.println("3. Exit");
-
             try {
                 choice = Integer.parseInt(scan.nextLine());
             } catch (NumberFormatException e) {
@@ -90,9 +82,14 @@ public class Main {
                 addIngredient(recipe, scan);
             } else if (choice == 2) {
                 recipe.print();
-            } else if (choice != 3) {
+            } else  {
                 System.out.println("Invalid choice, please select again.");
             }
+            System.out.println(" Recipe Book System ");
+            System.out.println("---------------------------");
+            System.out.println("1. Add an ingredient");
+            System.out.println("2. List recipe ingredients");
+            System.out.println("3. Exit");
         }
         System.out.println("Goodbye!");
         return choice;
